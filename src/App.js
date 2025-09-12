@@ -1,4 +1,5 @@
-import {createContext, useContext} from "react";
+import {createContext, useContext, useReducer} from "react";
+import "./App.css"
 
 export const initState = [
 	{id: 1, text: "the first todo", done: false},
@@ -7,7 +8,13 @@ export const initState = [
 export const TodoContext = createContext()
 
 function TodoItem(props) {
-	return null;
+	return <div className={"todo-item"}>
+		<span className={
+			props.todo.done ? "todo-done" : ""
+		}>
+			{props.todo.text}
+		</span>
+	</div>;
 }
 
 function TodoGroup() {
@@ -26,7 +33,7 @@ export function todoReducer(state, action) {
 }
 
 function App() {
-	const [state, dispatch] = useContext(todoReducer, initState);
+	const [state, dispatch] = useReducer(todoReducer, initState);
 	return (
 		<div>
 			<TodoContext.Provider value={{state, dispatch}}>
