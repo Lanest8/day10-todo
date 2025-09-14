@@ -3,6 +3,7 @@ import "./App.css"
 import {todoReducer} from "./reducers/TodoReducer";
 import {TodoGroup} from "./components/TodoGroup";
 import {TodoContext} from "./contexts/TodoContext";
+import {TodoInput} from "./components/TodoInput";
 
 export const initState = [
 	{id: 1, text: "the first todo", done: false},
@@ -12,24 +13,6 @@ export const initState = [
 function App() {
 	const [state, dispatch] = useReducer(todoReducer, initState);
 	
-	const [inputValue, setInputValue] = useState("");
-	
-	const handleAddTodo = () => {
-		if (inputValue.trim()) {
-			dispatch({
-				type: "ADD_TODO",
-				payload: {text: inputValue}
-			});
-			setInputValue("");
-		}
-	};
-	
-	const handleKeyPress = (e) => {
-		if (e.key === 'Enter') {
-			handleAddTodo();
-		}
-	};
-	
 	return (
 		<div className="app-container">
 			<div className="header">
@@ -38,18 +21,8 @@ function App() {
 			
 			<TodoContext.Provider value={{state, dispatch}}>
 				<TodoGroup/>
+				<TodoInput/>
 			</TodoContext.Provider>
-			
-			<div className="input-section">
-				<input
-					type="text"
-					value={inputValue}
-					onChange={(e) => setInputValue(e.target.value)}
-					onKeyPress={handleKeyPress}
-					className="todo-input"
-				/>
-				<button onClick={handleAddTodo} className="add-button">add</button>
-			</div>
 		</div>
 	);
 }
