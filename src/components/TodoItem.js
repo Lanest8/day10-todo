@@ -12,6 +12,13 @@ export function TodoItem(props) {
 		})
 	}
 	
+	function deleteTodo() {
+		dispatch({
+			type: "DELETE_TODO",
+			payload: {id: props.todo.id}
+		});
+	}
+	
 	return <div className={"todo-item"}>
 		<span
 			className={props.todo.done ? "todo-done" : ""}
@@ -19,5 +26,6 @@ export function TodoItem(props) {
 		>
 			{props.todo.text}
 		</span>
+		<button className="delete-button" onClick={deleteTodo}>×</button>
 	</div>;
 }

@@ -1,4 +1,4 @@
-import {useReducer} from "react";
+import {useReducer, useState} from "react";
 import "./App.css"
 import {todoReducer} from "./reducers/TodoReducer";
 import {TodoGroup} from "./components/TodoGroup";
@@ -11,11 +11,45 @@ export const initState = [
 
 function App() {
 	const [state, dispatch] = useReducer(todoReducer, initState);
+	
+	const [inputValue, setInputValue] = useState("");
+	
+	const handleAddTodo = () => {
+		if (inputValue.trim()) {
+			dispatch({
+				type: "ADD_TODO",
+				payload: {text: inputValue}
+			});
+			setInputValue("");
+		}
+	};
+	
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter') {
+			handleAddTodo();
+		}
+	};
+	
 	return (
-		<div>
-			<TodoContext value={{state, dispatch}}>
+		<div className="app-container">
+			<div className="header">
+				<h1>Todo List</h1>
+			</div>
+			
+			<TodoContext.Provider value={{state, dispatch}}>
 				<TodoGroup/>
-			</TodoContext>
+			</TodoContext.Provider>
+			
+			<div className="input-section">
+				<input
+					type="text"
+					value={inputValue}
+					onChange={(e) => setInputValue(e.target.value)}
+					onKeyPress={handleKeyPress}
+					className="todo-input"
+				/>
+				<button onClick={handleAddTodo} className="add-button">add</button>
+			</div>
 		</div>
 	);
 }
