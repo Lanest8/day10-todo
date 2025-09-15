@@ -61,11 +61,28 @@
     text-decoration: line-through;
 }
 
+.detail-button {
+    position: absolute;
+    right: 10px;
+    padding: 6px 12px;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #089ef5;
+}
+
+.detail-button:hover {
+    background-color: #f0f8ff;
+}
+
 .delete-button {
     position: absolute;
     right: -60px;
+    background-color: transparent;
     border: 1px solid black;
-    color: #000;
+    color: #ff6b6b;
     font-size: 16px;
     cursor: pointer;
     width: 45px;
@@ -73,4 +90,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.delete-button:hover {
+    background-color: #fff5f5;
 }

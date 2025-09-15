@@ -35,7 +35,7 @@ export function TodoItem(props) {
 		>
 			{props.todo.text}
 		</span>
-		<button className="detail-button" onClick={viewDetail}>查看详细</button>
+		<button className="detail-button" onClick={viewDetail}>detail</button>
 		<button className="delete-button" onClick={deleteTodo}>×</button>
 	</div>;
 }
