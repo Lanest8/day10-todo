@@ -9,7 +9,7 @@ import {api} from "./api/MockApi";
 function App() {
 	const [state, dispatch] = useReducer(todoReducer, initState);
 	useEffect(() => {
-		api.get('/')
+		api.get('/todos')
 			.then(response => response.data)
 			.then(todos => dispatch({type: 'LOAD_TOGGLE', payload: todos}))
 	}, []);
