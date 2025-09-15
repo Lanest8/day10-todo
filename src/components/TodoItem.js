@@ -22,11 +22,11 @@ export function TodoItem(props) {
 	
 	function makeAsDone() {
 		putTodo(props)
-			.then(() => {
+			.then((todo) => {
 				// API调用成功后更新本地状态
 				dispatch({
-					type: "TOGGLE_TODO",
-					payload: {id: props.todo.id}
+					type: "UPDATE_TODO",
+					payload: todo
 				});
 			})
 	}
