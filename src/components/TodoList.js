@@ -1,9 +1,9 @@
 import {TodoGroup} from "./TodoGroup";
-import {TodoInput} from "./TodoInput";
+import {TodoGenerator} from "./TodoGenerator";
 
 export function TodoList() {
 	return <>
 		<TodoGroup/>
-		<TodoInput/>
+		<TodoGenerator/>
 	</>;
 }
