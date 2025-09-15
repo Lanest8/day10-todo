@@ -5,6 +5,7 @@ import {TodoContext} from "./contexts/TodoContext";
 import {TodoList} from "./components/TodoList";
 import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router";
 import {ErrorPage} from "./pages/ErrorPage";
+import {HomePage} from "./pages/HomePage";
 
 function DefaultLayout() {
 	return <div>
@@ -29,7 +30,7 @@ const routes = createBrowserRouter
 		errorElement: <ErrorPage/>,
 		children: [{
 			path: "/",
-			element: <TodoList/>
+			element: <HomePage/>
 		}]
 	}
 ])
