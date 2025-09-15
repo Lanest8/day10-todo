@@ -1,5 +1,7 @@
 export function todoReducer(state, action) {
 	switch (action.type) {
+		case "LOAD_TOGGLE":
+			return action.payload;
 		case "TOGGLE_TODO":
 			/// copy
 			const newState = [...state];
