@@ -1,5 +1,5 @@
 import {useEffect, useReducer} from "react";
-import "./App.css"
+import "./css/App.css"
 import {todoReducer} from "./reducers/TodoReducer";
 import {initState, TodoContext} from "./contexts/TodoContext";
 import {RouterProvider} from "react-router";
