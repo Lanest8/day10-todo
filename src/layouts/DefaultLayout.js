@@ -1,21 +1,62 @@
-import {NavLink, Outlet} from "react-router";
+// src/layouts/DefaultLayout.js
+import { NavLink, Outlet } from "react-router";
+import { Layout, Menu } from "antd";
+import { HomeOutlined, CheckCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import "../DefaultLayout.css";
 
+const { Header, Footer, Sider, Content } = Layout;
 export function DefaultLayout() {
+	const menuItems = [
+		{
+			key: "home",
+			icon: <HomeOutlined />,
+			label: <NavLink to="/">Home</NavLink>
+		},
+		{
+			key: "done",
+			icon: <CheckCircleOutlined />,
+			label: <NavLink to="/done">Done</NavLink>
+		},
+		{
+			key: "about",
+			icon: <InfoCircleOutlined />,
+			label: <NavLink to="/about">About Us</NavLink>
+		}
+	];
+	
 	return (
-		<div className="default-layout">
-			<header>
-				<nav>
-					<ul>
-						<li><NavLink to={"/"}>Home</NavLink></li>
-						<li><NavLink to={"/done"}>Done</NavLink></li>
-						<li><NavLink to={"/about"}>About us</NavLink></li>
-					</ul>
-				</nav>
-			</header>
-			<main>
-				<Outlet/>
-			</main>
-		</div>
+		<Layout className="default-layout">
+			<Header style={{
+				position: "sticky",
+				top: 0,
+				zIndex: 1,
+				width: "100%",
+				background: "linear-gradient(135deg, #2c3e50 0%, #3498db 100%)",
+				padding: 0,
+				boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+			}}>
+				<Menu
+					theme="dark"
+					mode="horizontal"
+					items={menuItems}
+					style={{
+						minWidth: 0,
+						flex: "auto",
+						background: "transparent"
+					}}
+					selectedKeys={[window.location.pathname]}
+				/>
+			</Header>
+			<Content style={{
+				padding: "24px 48px",
+				minHeight: "calc(100vh - 64px)",
+				background: "linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%)"
+			}}>
+				<div style={{ maxWidth: 1200, margin: "0 auto" }}>
+					<Outlet />
+				</div>
+			</Content>
+			<Footer>@OOCL Lanest</Footer>
+		</Layout>
 	);
 }
