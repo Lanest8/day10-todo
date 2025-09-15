@@ -9,14 +9,22 @@ export function TodoItem(props) {
 	const navigate = useNavigate();
 	
 	function makeAsDone() {
-		dispatch({
-			type: "TOGGLE_TODO",
-			payload: {id: props.todo.id}
+		api.put(`/todos/${props.todo.id}`, {
+			...props.todo,
+			done: !props.todo.done
 		})
+			.then(response => response.data)
+			.then(() => {
+				// API调用成功后更新本地状态
+				dispatch({
+					type: "TOGGLE_TODO",
+					payload: {id: props.todo.id}
+				});
+			})
 	}
 	
 	function deleteTodo() {
-		api.delete("/todos/" + props.todo.id)
+		api.delete(`/todos/${props.todo.id}`)
 			.then(response => response.data)
 			.then(() =>
 				dispatch({
