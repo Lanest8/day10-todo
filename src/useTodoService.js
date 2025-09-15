@@ -14,7 +14,7 @@ export function useToService() {
 	const putTodo = (props) => {
 		return api.put(`/todos/${props.todo.id}`, {
 			...props.todo,
-			done: !props.todo.done
+			done: props.todo.done
 		}).then(response => response.data)
 	}
 	
