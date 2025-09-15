@@ -1,7 +1,7 @@
 import {NavLink, Outlet} from "react-router";
 import {Layout, Menu} from "antd";
 import {HomeOutlined, CheckCircleOutlined, InfoCircleOutlined} from "@ant-design/icons";
-import "../DefaultLayout.css";
+import "../css/DefaultLayout.css";
 
 const {Header, Footer, Content} = Layout;
 
