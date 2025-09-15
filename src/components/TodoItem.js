@@ -3,8 +3,9 @@ import {useContext, useState} from "react";
 import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
 import {useToService} from "../useTodoService";
-import {Button, Modal, Input, Space} from "antd";
-import {EditOutlined, DeleteOutlined, EyeOutlined} from "@ant-design/icons";
+import {Button, Space} from "antd";
+import {DeleteOutlined, EditOutlined, EyeOutlined} from "@ant-design/icons";
+import {TodoModal} from "./TodoModal";
 
 export function TodoItem(props) {
 	const {dispatch} = useContext(TodoContext);
@@ -14,8 +15,12 @@ export function TodoItem(props) {
 	const [editText, setEditText] = useState(props.todo.text);
 	
 	function makeAsDone() {
-		putTodo(props)
-			.then((todo) => {
+		putTodo({
+			todo: {
+				...props.todo,
+				done: !props.todo.done
+			}
+		}).then((todo) => {
 				dispatch({
 					type: "UPDATE_TODO",
 					payload: todo
@@ -68,8 +73,8 @@ export function TodoItem(props) {
 	return (
 		<div className={"todo-item"}>
 			<span className={props.todo.done ? "todo-done" : ""}
-				onClick={makeAsDone}
-				style={{cursor: "pointer"}}
+				  onClick={makeAsDone}
+				  style={{cursor: "pointer"}}
 			>
 				{props.todo.text}
 			</span>
@@ -78,24 +83,8 @@ export function TodoItem(props) {
 				<Button icon={<EditOutlined/>} onClick={showModal} size="small"></Button>
 				<Button icon={<DeleteOutlined/>} onClick={removeTodo} danger size="small"></Button>
 			</Space>
-			<Modal title="Edit" open={isModalVisible} onOk={handleOk}
-				onCancel={handleCancel} okText="Save" cancelText="Cancel"
-				okButtonProps={{
-					style: {
-						background: 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)',
-						border: 'none',
-						boxShadow: '0 4px 12px rgba(52, 152, 219, 0.3)'
-					}
-				}}
-				cancelButtonProps={{
-					style: {
-						borderColor: '#3498db',
-						color: '#3498db'
-					}
-				}}
-			>
-				<Input value={editText} onChange={(e) => setEditText(e.target.value)} size="large"/>
-			</Modal>
+			<TodoModal title="Edit" open={isModalVisible} onOk={handleOk} onCancel={handleCancel} value={editText}
+					   onChange={(e) => setEditText(e.target.value)}/>
 		</div>
 	);
 }
