@@ -1,9 +1,9 @@
 import {createBrowserRouter} from "react-router";
 import {ErrorPage} from "../pages/ErrorPage";
 import {HomePage} from "../pages/HomePage";
-import {TodoDetailPage} from "../pages/TodoDetailPage";
 import {DefaultLayout} from "../layouts/DefaultLayout";
 import {DoneListPage} from "../pages/DoneListPage";
+import {TodoDetailPage} from "../pages/TodoDetailPage";
 
 export const routes = createBrowserRouter
 ([
@@ -15,13 +15,18 @@ export const routes = createBrowserRouter
 			{
 				path: "/",
 				element: <HomePage/>
-			}, {
-				path: "/todo/:id",
-				element: <TodoDetailPage/>
 			},
 			{
 				path: "/done",
 				element: <DoneListPage/>
+			},
+			{
+				path: "/todo/:id",
+				element: <TodoDetailPage/>
+			},
+			{
+				path: "/done/:id",
+				element: <TodoDetailPage/>
 			}
 		]
 	}
