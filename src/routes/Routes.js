@@ -4,6 +4,7 @@ import {HomePage} from "../pages/HomePage";
 import {DefaultLayout} from "../layouts/DefaultLayout";
 import {DoneListPage} from "../pages/DoneListPage";
 import {TodoDetailPage} from "../pages/TodoDetailPage";
+import {AboutUsPage} from "../pages/AboutUsPage";
 
 export const routes = createBrowserRouter
 ([
@@ -27,6 +28,10 @@ export const routes = createBrowserRouter
 			{
 				path: "/done/:id",
 				element: <TodoDetailPage/>
+			},
+			{
+				path: "/about",
+				element: <AboutUsPage/>
 			}
 		]
 	}
