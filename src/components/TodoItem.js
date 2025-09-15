@@ -2,23 +2,12 @@ import {useContext} from "react";
 
 import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
-import {api} from "../api/MockApi";
-
-const putTodo = (props) => {
-	return api.put(`/todos/${props.todo.id}`, {
-		...props.todo,
-		done: !props.todo.done
-	}).then(response => response.data)
-}
-
-const deleteTodo = (props) => {
-	return api.delete(`/todos/${props.todo.id}`)
-		.then(response => response.data)
-}
+import {useToService} from "../useTodoService";
 
 export function TodoItem(props) {
 	const {dispatch} = useContext(TodoContext);
 	const navigate = useNavigate();
+	const {putTodo, deleteTodo} = useToService();
 	
 	function makeAsDone() {
 		putTodo(props)
