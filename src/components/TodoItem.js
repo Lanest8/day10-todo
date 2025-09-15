@@ -4,16 +4,19 @@ import {TodoContext} from "../contexts/TodoContext";
 import {useNavigate} from "react-router";
 import {api} from "../api/MockApi";
 
+const putTodo = (props) => {
+	return api.put(`/todos/${props.todo.id}`, {
+		...props.todo,
+		done: !props.todo.done
+	}).then(response => response.data)
+}
+
 export function TodoItem(props) {
-	const {state, dispatch} = useContext(TodoContext);
+	const {dispatch} = useContext(TodoContext);
 	const navigate = useNavigate();
 	
 	function makeAsDone() {
-		api.put(`/todos/${props.todo.id}`, {
-			...props.todo,
-			done: !props.todo.done
-		})
-			.then(response => response.data)
+		putTodo(props)
 			.then(() => {
 				// API调用成功后更新本地状态
 				dispatch({
