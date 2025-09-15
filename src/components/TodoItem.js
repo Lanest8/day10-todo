@@ -11,6 +11,11 @@ const putTodo = (props) => {
 	}).then(response => response.data)
 }
 
+const deleteTodo = (props) => {
+	return api.delete(`/todos/${props.todo.id}`)
+		.then(response => response.data)
+}
+
 export function TodoItem(props) {
 	const {dispatch} = useContext(TodoContext);
 	const navigate = useNavigate();
@@ -26,9 +31,8 @@ export function TodoItem(props) {
 			})
 	}
 	
-	function deleteTodo() {
-		api.delete(`/todos/${props.todo.id}`)
-			.then(response => response.data)
+	function removeTodo() {
+		deleteTodo(props)
 			.then(() =>
 				dispatch({
 					type: "DELETE_TODO",
@@ -53,6 +57,6 @@ export function TodoItem(props) {
 			{props.todo.text}
 		</span>
 		<button className="detail-button" onClick={viewDetail}>detail</button>
-		<button className="delete-button" onClick={deleteTodo}>×</button>
+		<button className="delete-button" onClick={removeTodo}>×</button>
 	</div>;
 }
